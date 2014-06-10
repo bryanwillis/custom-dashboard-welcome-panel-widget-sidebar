@@ -10,15 +10,48 @@ License: Uses Filter table plugin @https://github.com/sunnywalker/jQuery.FilterT
 Copyright (c) 2012 Sunny Walker <swalker@hawaii.edu>
 */
 
-add_action( 'admin_print_footer_scripts', 'float_the_head', 999 );
+function enqueue_select2_jquery() {
+    wp_register_style( 'select2css', 'http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css', false, '1.0', 'all' );
+    wp_register_script( 'select2', 'http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.js', array( 'jquery' ), '1.0', true );
+    wp_enqueue_style( 'select2css' );
+    wp_enqueue_script( 'select2' );
+    }
+add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
+
+add_action( 'admin_print_footer_scripts', 'float_the_head', 999 );
 function float_the_head() {
 global $pagenow, $typenow;
-    // PAGE IS EDIT AND TYPE IS PAGE OR POST , OR PAGE IS PLUGINS (ADD MORE IF YOU WANT)
+    // PAGE IS EDIT AND TYPE IS PAGE OR POST , OR PAGE IS PLUGINS
 if ( ( ( $pagenow == 'edit.php' ) && ($typenow == 'page' || $typenow == 'post') ) || ( $pagenow == 'plugins.php' ) ) {
+   
     if ( wp_script_is( 'jquery', 'done' ) ) {
 
         ?>
+<style type="text/css">
+.select2-container {margin: 0 2px 0 2px;}
+.tablenav.top #doaction, #doaction2, #post-query-submit {margin: 0px 4px 0 4px;}
+</style>        
+<script type='text/javascript'>
+jQuery( document ).ready(
+    function( $ ) {
+        $( "select:visible" ).select2(); // Only fire on visible inputs to begin with.
+        $( document.body ).on( "focus", ".ptitle,select",
+            function ( ev ) {
+                if ( ev.target.nodeName === "SELECT" ) {
+                    // Fire for this element only
+                    $( this ).select2({ width: "element" });
+                } else {
+                    // Fire again, but only for selects that haven't yet been select2'd
+                    $( "select:visible" ).not( ".select2-offscreen" ).select2({
+                        width: "element"
+                    });
+                }
+            }
+        );
+    }
+);
+</script>                       
 <style type="text/css">
 .tableFloatingHeaderOriginal {background-color: #ffffff;}
 </style>
@@ -41,7 +74,7 @@ jQuery(document).ready(function($) {
         });
 });                                                                                                                     
 </script>
-        <?php       
+<?php       
     }
   }
 }
