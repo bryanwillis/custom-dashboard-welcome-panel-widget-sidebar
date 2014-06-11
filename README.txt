@@ -8,11 +8,15 @@ Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Very small and simple plugin that makes the tables on edit.php and plugins.php easier to work with. Adds a sticky header to the columns and allows instanst "live" table filter search
+Very small and simple plugin that makes the tables on edit.php and plugins.php easier to work with. Adds a sticky header to the columns and allows instanst "live" table filter search.
 
 == Description ==
 
-Lets make the Wordpress edit screens better! With all the constant updates to wordpress the edit screens have been virtually unchanged for as long as I can remember. This plugin aims to modify the way the tables work, to allow for quicker and easier editing. Use this plugin with  
+Lets make the Wordpress edit screens better! With all the constant updates to wordpress the edit screens have been virtually unchanged for as long as I can remember. This plugin aims to modify the way the tables work, to allow for quicker and easier editing. 
+
+Use this plugin with Codepress Admin columns to really make your editing tables 
+
+https://wordpress.org/plugins/codepress-admin-columns/
 
 
 == Installation ==
